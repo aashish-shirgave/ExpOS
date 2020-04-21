@@ -1,21 +1,27 @@
+//loading different interrupt
+
+//load --int=timer path
+loadi(4, 17);
+loadi(5, 18);
+
+//load --int=10 path
+loadi(22,35);
+loadi(23,36);
+
+//load --exhandler path
+loadi(2, 15);
+loadi(3, 16);
+
+
 
 //Loading the init program from disk to memory
+//load --init path
 
 loadi(65,7);
 loadi(66,8);
 
-//loading different interrupt
-
-//INIT 10
-loadi(22,35);
-loadi(23,36);
-//exception handler
-loadi(2, 15);
-loadi(3, 16);
-
 //Loading Library code 
 //load --library ../expl/library.lib
-//Use this command for lading library to disk block 13 and 14 
 
 loadi(63,13);
 loadi(64,14);
