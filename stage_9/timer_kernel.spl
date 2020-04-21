@@ -1,0 +1,22 @@
+
+[PROCESS_TABLE + ( [SYSTEM_STATUS_TABLE + 1] * 16) + 13] = SP;
+
+// Setting SP to UArea Page number * 512 - 1
+SP = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1] * 16) + 11] * 512 - 1;
+
+backup;
+
+print "TIMER 9";
+
+//Assignment to print current PID of the program before returning to user mode
+
+alias currentPID R0;
+currentPID = [[SYSTEM_STATUS_TABLE + 1]];
+
+print currentPID;
+
+restore;
+
+SP = [PROCESS_TABLE + ( [SYSTEM_STATUS_TABLE + 1] * 16) + 13];
+
+ireturn;
