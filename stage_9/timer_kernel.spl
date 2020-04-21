@@ -11,8 +11,8 @@ print "TIMER 9";
 //Assignment to print current PID of the program before returning to user mode
 
 alias currentPID R0;
-currentPID = [[SYSTEM_STATUS_TABLE + 1]];
-
+currentPID = [SYSTEM_STATUS_TABLE + 1];
+print "currentPID is ";
 print currentPID;
 
 restore;
