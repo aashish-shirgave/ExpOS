@@ -5,8 +5,11 @@ loadi(65,7);
 loadi(66,8);
 
 //loading different interrupt
+
+//INIT 10
 loadi(22,35);
 loadi(23,36);
+//exception handler
 loadi(2, 15);
 loadi(3, 16);
 
