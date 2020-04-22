@@ -1,0 +1,7 @@
+load --os ../stage_10/os_startup.xsm
+load --int=timer ../stage_9/timer_kernel.xsm
+load --int=10 ../haltprog.xsm
+load --exhandler ../stage_10/exception.xsm
+load --library ../expl/library.lib
+load --int=7 ../stage_10/int7.xsm
+load --init ../stage_11/assign2.xsm
