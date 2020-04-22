@@ -1,1 +1,5 @@
-halt;
+MOV R16, "system halt"
+PORT P1, R16
+OUT
+HALT
+HALT
