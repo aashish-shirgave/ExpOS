@@ -1,2 +1,2 @@
-cd $HOME/myexpos/xsm
+cd $HOME/os_project/xsm
 ./xsm

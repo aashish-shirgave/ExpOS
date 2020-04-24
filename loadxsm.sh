@@ -1,2 +1,2 @@
-cd $HOME/myexpos/xfs-interface
+cd $HOME/os_project/xfs-interface
 ./xfs-interface
