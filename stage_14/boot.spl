@@ -10,7 +10,7 @@ loadi(65,7);    // init process
 loadi(66,8);
 
 loadi(84, 69);
-//loadi(85, 8);  // second init process
+loadi(85, 8);  // second init process
 
 
 loadi(22,35);   // int_10
@@ -116,6 +116,13 @@ PTLR = 10;
 
 [86*512] = [84 * 512 + 1];
 
+
+alias pid R1;
+pid = 3;
+while(pid < 16) do
+    [PROCESS_TABLE + (pid * 16) + 4] = TERMINATED;
+    pid = pid + 1;
+endwhile;
 
 
 return;

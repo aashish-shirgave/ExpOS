@@ -5,9 +5,25 @@ alias process_table_entry R1;
 process_table_entry = PROCESS_TABLE + 16 * currPID;
 [process_table_entry + 4] = TERMINATED;
 
+alias cnt R2;
+alias flag R3;
+cnt = 0;
+flag = 0;
 
-if([PROCESS_TABLE + 4] == TERMINATED && [PROCESS_TABLE + 16+ 4] == TERMINATED && [PROCESS_TABLE + 32 + 4] == TERMINATED) then
-	halt;
+while(cnt < 16) do 
+    if([PROCESS_TABLE + (16*cnt) + 4] == READY || [PROCESS_TABLE + (16*cnt) + 4] == CREATED) then
+        flag = 1;
+        break;
+    endif;
+    cnt = cnt + 1;
+endwhile;
+
+if(flag == 0) then
+    halt;
 endif;
+
+//if([PROCESS_TABLE + 4] == TERMINATED && [PROCESS_TABLE + 16+ 4] == TERMINATED && [PROCESS_TABLE + 32 + 4] == TERMINATED) then
+//	halt;
+//endif;
 
 call MOD_5;
