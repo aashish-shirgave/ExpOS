@@ -1,0 +1,71 @@
+//Set the MODE FLAG field in the process table to the system call number which is 5 for write system call.
+
+[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 9] = 5;
+
+//Store the value of user SP in a register as we need it for further computations
+
+alias userSP R0;
+userSP = SP;
+
+//switch stack from user to kernel
+
+[PROCESS_TABLE + ( [SYSTEM_STATUS_TABLE + 1] * 16) + 13] = SP;
+
+// Setting SP to UArea Page number * 512 - 1
+SP = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1] * 16) + 11] * 512 - 1;
+
+
+//getting the arguments from the User Stack
+
+alias physicalPageNum R1;
+alias offset R2;
+alias fileDescPhysicalAddr R3;
+
+physicalPageNum = [PTBR + 2 * ((userSP - 4)/ 512)];
+offset = (userSP - 4) % 512;
+fileDescPhysicalAddr = (physicalPageNum * 512) + offset;
+
+alias fileDescriptor R4;
+fileDescriptor=[fileDescPhysicalAddr];
+
+
+if(fileDescriptor != -2)
+then 
+    //code when argument 1 is not valid
+    //store -1 as a return value which is stored at memory location userSP -1 in the user stack
+    
+    alias physicalAddrRetVal R5;
+	physicalAddrRetVal = ([PTBR + 2 * ((userSP - 1) / 512)] * 512) + ((userSP - 1) % 512);
+	[physicalAddrRetVal] = -1;
+
+else
+    //code when argument 1 is valid
+    //get the word to print from user stack
+  
+    alias word R5;
+    word = [[PTBR + 2 * ((userSP - 3) / 512)] * 512 + ((userSP - 3) % 512)];
+    //print word;
+    //set return value to 0 indicating success
+    
+    multipush(R0,R1,R2,R3,R4,R5);
+    physicalPageNum = 3;					//Terminal Write
+	offset = [SYSTEM_STATUS_TABLE + 1];		//pid
+	fileDescPhysicalAddr = word;			//word to be printed
+	call MOD_4;
+	multipop(R0,R1,R2,R3,R4,R5);
+    
+    alias physicalAddrRetVal R6;
+    physicalAddrRetVal = ([PTBR + 2 * (userSP - 1)/ 512] * 512) + ((userSP - 1) % 512);
+    [physicalAddrRetVal] = 0;
+
+endif;
+
+//setting back SP to user stack pointer
+ SP = userSP;
+
+//Reset the MODE FLAG field in the process table to 0. Value 0 indicates that process is running in user mode
+
+[PROCESS_TABLE + [SYSTEM_STATUS_TABLE + 1] * 16 + 9] = 0;
+
+ireturn;
+
