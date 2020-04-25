@@ -1,0 +1,19 @@
+int main()
+{
+decl
+    int temp, num,t;
+enddecl
+
+begin
+    num = 500;
+    t = 999;
+    temp = exposcall("Write", -2, t);
+    while(num < 600) do
+        if((num % 2) == 0) then
+            temp = exposcall("Write", -2, num);
+        endif;
+        num = num + 1;
+    endwhile;
+    return 0;
+end
+}
