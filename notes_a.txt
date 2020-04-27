@@ -1,0 +1,12 @@
+--> ireturn returns the statement to caller with IP from stack 
+and changes execution mode from kernel mode to user mode.
+  where return statement returns to caller from IP from stack but
+  does not change the mode
+
+-->Modules can only be called from kernel mode.
+   The inturrupts gererated by the code calls the modules.
+
+-->Kernel stack management
+https://exposnitc.github.io/os_design-files/stack_module.html (Normal no need to read)
+
+-->

@@ -19,6 +19,15 @@ while (pid < 16) do
 	endif;
 	pid = pid + 1;
 endwhile;
+if (flag == 0) then
+	pid = 1;
+	while (pid < currentpid) do
+		if ([PROCESS_TABLE + (pid * 16) + 4] == READY || [PROCESS_TABLE + (pid * 16) + 4] == CREATED) then
+		flag = 1;
+		break;
+	endif;
+	endwhile;
+endif;
 
 if (flag == 0) then 
 	pid = 0;
