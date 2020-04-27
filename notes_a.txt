@@ -9,4 +9,19 @@ and changes execution mode from kernel mode to user mode.
 -->Kernel stack management
 https://exposnitc.github.io/os_design-files/stack_module.html (Normal no need to read)
 
--->
+-->Control flow while timer inturrupt and scheduler
+/*/*/*/*/*/
+
+
+-->resource manager module
+  before using a resource, a process must acquire the required resource by invoking resource manager
+  (More about it https://exposnitc.github.io/os_modules/Module_0.html)
+  -here we are doing only terminal resource management
+  her two things are possible 1-> acquire terminal (function no.8)and 2-> release terminal(9)
+  -the write system call does not directly calls acquire terminal and release terminal
+   Write system call invokes a function called Terminal Write present in device manager module (Module 4)
+   https://exposnitc.github.io/os_modules/Module_4.html
+
+   -Every resource keeps a wait queue keep record of process who wants the resource
+   after resource is released only first process of the wait queue is woken up by OS
+   
