@@ -1,0 +1,32 @@
+int main()
+{
+decl
+    int temp,i,j,a[10];
+enddecl
+begin
+    i = 0;
+    while (i < 10) do
+    	read (a[i]);
+        i = i + 1;
+    endwhile;
+    i = 0;
+    while (i < 10) do
+    	j = i + 1;
+    	while (j < 10) do
+    		if (a[i] > a[j]) then
+    			temp = a[i];
+    			a[i] = a[j];
+    			a[j] = a[i];
+    		endif;
+    		j = j + 1;
+    	endwhile;
+    	i = i + 1;
+    endwhile;
+    i = 0;
+    while (i < 10) do
+    	write (a[i]);
+    	write ("\n");
+    endwhile;
+    return 0;
+end
+}
