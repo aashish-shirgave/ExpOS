@@ -1,6 +1,10 @@
 alias functionNum R1;
-if (functionNum == 1) then			//Get Free Page
-	[SYSTEM_STATUS_TABLE + 3] = [SYSTEM_STATUS_TABLE + 3] + 1;	//wait mem count 
+
+// Get Free Page
+if (functionNum == 1) then			
+    
+    // Wait Mem count
+	[SYSTEM_STATUS_TABLE + 3] = [SYSTEM_STATUS_TABLE + 3] + 1;
 	while ([SYSTEM_STATUS_TABLE + 2] == 0) do
 		[PROCESS_TABLE + ( [SYSTEM_STATUS_TABLE + 1] * 16) + 4] = WAIT_MEM;
 		multipush(R1);
@@ -19,10 +23,12 @@ if (functionNum == 1) then			//Get Free Page
 		counter = counter + 1;
 	endwhile;
 endif;
-if (functionNum == 2) then			//Release Page	
-	alias PageNum R2;
-	[MEMORY_FREE_LIST + PageNum] = [MEMORY_FREE_LIST + PageNum] - 1;
-	if ([MEMORY_FREE_LIST + PageNum] == 0) then
+
+// Release Page
+if (functionNum == 2) then			
+	alias PageNo R2;
+	[MEMORY_FREE_LIST + PageNo] = [MEMORY_FREE_LIST + PageNo] - 1;
+	if ([MEMORY_FREE_LIST + PageNo] == 0) then
 		[SYSTEM_STATUS_TABLE + 2] = [SYSTEM_STATUS_TABLE + 2] + 1;
 	endif;
 	alias counter R3;

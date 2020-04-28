@@ -1,6 +1,9 @@
 alias functionNum R1;
 alias pid R2;
-if (functionNum == 2) then		//Free User Area Page
+
+// Free user page area
+
+if (functionNum == 2) then	
 	alias UserAreaPage R3;
 	UserAreaPage = [PROCESS_TABLE + (pid * 16) + 11];
 	multipush(R1,R2);
@@ -10,13 +13,14 @@ if (functionNum == 2) then		//Free User Area Page
 	multipop(R1,R2);
 	return;
 endif;
-if (functionNum == 3) then			//Exit
+
+// Exit
+
+if (functionNum == 3) then			
 	multipush(R1,R2);
 	R1 = 4;			//Free page table
 	R2 = pid;
 	call MOD_1;
-	//multipop(R1,R2);
-	//multipush(R1,R2);
 	R1 = 2;			//Free User are page
 	R2 = pid;
 	call MOD_1;
@@ -24,7 +28,10 @@ if (functionNum == 3) then			//Exit
 	[PROCESS_TABLE + (pid * 16) + 4] = TERMINATED;
 	return;
 endif;
-if (functionNum == 4) then			//Free Page Table
+
+// Free Page Table
+
+if (functionNum == 4) then		
 	alias ptbr R3;
 	alias ptlr R4;
 	R3 = [PROCESS_TABLE + (pid * 16) + 14];
