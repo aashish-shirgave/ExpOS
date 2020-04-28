@@ -1,0 +1,119 @@
+//loading disk block to memory pages
+
+loadi(2, 15);   // exhandler
+loadi(3, 16);
+
+loadi(4,17);    // timer
+loadi(5,18);
+
+loadi(8,21);
+loadi(9,22); //console int
+
+loadi(14,27);
+loadi(15, 28); //int 6
+
+loadi(16,29);   // int_7
+loadi(17,30);
+
+loadi(20,33);		//int_9
+loadi(21,34);
+
+loadi(22,35);   // int_10
+loadi(23,36);
+
+loadi(40,53);
+loadi(41,54); //module 0 resouce manager
+
+loadi(42,55);	//Mod 1
+loadi(43,56);
+
+loadi(44,57);	//Mod 2
+loadi(45,58);
+
+loadi(48,61);
+loadi(49,62);// module 4 device manager
+
+loadi(50,63); //schedular
+loadi(51,64);
+
+loadi(59,3);		//inode table
+loadi(60,4);
+
+loadi(63,13);   // library
+loadi(64,14);
+
+loadi(65,7);    // init process
+loadi(66,8);
+
+alias pid R1;
+pid = 2;
+while(pid < 16) do
+    [PROCESS_TABLE + (pid * 16) + 4] = TERMINATED;
+    pid = pid + 1;
+endwhile;
+
+[TERMINAL_STATUS_TABLE] = 0; //terminal status is 0 so it is available
+
+
+//For Init Process
+
+PTBR=PAGE_TABLE_BASE+20;
+
+//Library
+[PTBR+0] = 63;
+[PTBR+1] = "0100";
+[PTBR+2] = 64;
+[PTBR+3] = "0100";
+
+//Heap
+[PTBR+4] = 78;
+[PTBR+5] = "0110";
+[PTBR+6] = 79;
+[PTBR+7] = "0110";
+
+//Code
+[PTBR+8] = 65;
+[PTBR+9] = "0100";
+[PTBR+10] = 66;
+[PTBR+11] = "0100";
+[PTBR+12] = -1;
+[PTBR+13] = "0000";
+[PTBR+14] = -1;
+[PTBR+15] = "0000";
+
+//Stack
+[PTBR+16] = 76;
+[PTBR+17] = "0110";
+[PTBR+18] = 77;
+[PTBR+19] = "0110";
+
+
+PTLR = 10;
+
+
+[PROCESS_TABLE +16 + 1] = 1;            
+[PROCESS_TABLE +16 +  4] = CREATED;
+[PROCESS_TABLE +16 + 11] = 80;
+[PROCESS_TABLE +16 + 13] = 8*512;
+[PROCESS_TABLE +16 + 12] = 0;
+[PROCESS_TABLE +16 + 14] = PAGE_TABLE_BASE + 20;   // PTBR value
+[PROCESS_TABLE +16 + 15] = 10;                     // PTLR value
+
+[76*512] = [65 * 512 + 1];
+
+alias counter R1;
+counter = 0;
+while(counter < 83) do
+	[MEMORY_FREE_LIST + counter] = 1;
+	counter = counter + 1;
+endwhile;
+
+[SYSTEM_STATUS_TABLE + 2] = 0;
+[SYSTEM_STATUS_TABLE + 3] = 0;
+while(counter < 128) do					//count free pages
+	[MEMORY_FREE_LIST + counter] = 0;
+	[SYSTEM_STATUS_TABLE + 2] = [SYSTEM_STATUS_TABLE + 2] + 1;
+	counter = counter + 1;
+endwhile;
+
+return;
