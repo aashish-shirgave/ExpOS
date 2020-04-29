@@ -1,0 +1,61 @@
+// Disk store
+
+    Acquire the lock on the disk device by calling the Acquire_Disk() function
+    in the Resource Manager module;
+
+    Set the LOAD/STORE BIT, PAGE NUMBER and BLOCK NUMBER in the Disk Status Table.
+
+    Use the store statement to store the memory page to disk;
+
+    Set the state as (WAIT_DISK, - );
+
+    Call the switch_context() function from the Scheduler Module.
+
+    return;
+
+
+// Disk load
+
+
+    Acquire the lock on the disk device by calling the Acquire_Disk() function
+    in the Resource Manager module;
+
+    Reset the LOAD/STORE BIT, set PAGE NUMBER and BLOCK NUMBER in the Disk Status Table.
+
+    Use the load statement to load the disk block to memory;
+
+    Set the state as (WAIT_DISK, - );
+
+    Call the switch_context() function from the Scheduler Module.
+
+    return;
+
+//  Terminal Write
+
+    Acquire the lock on the terminal device by calling the Acquire_Terminal() function
+    in the Resource Manager module;
+
+    Use the print statement to print the contents of the word
+    to the terminal;
+
+    Release the lock on the terminal device by calling the Release_Terminal() function
+    in the Resource Manager module;
+
+    return;
+
+// Terminal Read
+
+    Acquire the lock on the disk device by calling the Acquire_Terminal() function
+    in the Resource Manager module;
+
+    Use the read statement to read the word from the terminal;
+
+    Set the state as (WAIT_TERMINAL, - );
+
+    Call the switch_context() function from the Scheduler Module.
+
+    Copy the word from the Input Buffer of the Process Table of the process corresponding to PID
+    to the memory address provided.
+
+    return;
+

@@ -46,7 +46,6 @@ loadi(65,7);    // init process
 loadi(66,8);
 
 alias pid R1;
-
 pid = 2;
 while(pid < 16) do
     [PROCESS_TABLE + (pid * 16) + 4] = TERMINATED;
@@ -102,19 +101,19 @@ PTLR = 10;
 
 [76*512] = [65 * 512 + 1];
 
-alias cnt R1;
-cnt = 0;
-while(cnt < 83) do
-	[MEMORY_FREE_LIST + cnt] = 1;
-	cnt = cnt + 1;
+alias counter R1;
+counter = 0;
+while(counter < 83) do
+	[MEMORY_FREE_LIST + counter] = 1;
+	counter = counter + 1;
 endwhile;
 
 [SYSTEM_STATUS_TABLE + 2] = 0;
 [SYSTEM_STATUS_TABLE + 3] = 0;
-while(cnt < 128) do					//count free pages
-	[MEMORY_FREE_LIST + cnt] = 0;
+while(counter < 128) do					//count free pages
+	[MEMORY_FREE_LIST + counter] = 0;
 	[SYSTEM_STATUS_TABLE + 2] = [SYSTEM_STATUS_TABLE + 2] + 1;
-	cnt = cnt + 1;
+	counter = counter + 1;
 endwhile;
 
 return;

@@ -10,31 +10,32 @@ offset = (userSP - 4) % 512;
 filenameAddr = (physicalPageNum * 512) + offset;
 alias filename R4;
 filename=[filenameAddr];
-alias fileindex R5;
+alias index R5;
 alias flag R6;
 flag = 0;
-fileindex = 0;				//inode table page 59
-while (fileindex < 960) do
-	if ([INODE_TABLE + fileindex+1] == filename) then
-		if ([INODE_TABLE + fileindex] == EXEC) then
+index = 0;				//inode table page 59
+while (index < 960) do
+	if ([INODE_TABLE + index+1] == filename) then
+		if ([INODE_TABLE + index] == EXEC) then
 			flag = 1;
 			break;
 		endif;
 	endif;
-	fileindex = fileindex + 16;
+	index = index + 16;
 endwhile;
 if (flag == 0) then
 	alias physicalAddrRetVal R7;
 	physicalAddrRetVal = ([PTBR + 2 * ((userSP - 1) / 512)] * 512) + ((userSP - 1) % 512);
 	[physicalAddrRetVal] = -1;
 else
-	fileindex = (INODE_TABLE + fileindex);
-	multipush(R1,R2,R3,R4,R5,R6);
+	alias fileindex R7;
+	fileindex = (INODE_TABLE + index);
+	multipush(R1,R2,R3,R4,R5,R6,R7);
 	R1 = 3; //calling exit
 	R2 = [SYSTEM_STATUS_TABLE + 1];
 	call MOD_1;
-	multipop(R1,R2,R3,R4,R5,R6);
-	alias UserAreaPage R7;
+	multipop(R1,R2,R3,R4,R5,R6,R7);
+	alias UserAreaPage R8;
 	UserAreaPage = [PROCESS_TABLE + ([SYSTEM_STATUS_TABLE + 1] * 16) + 11];
 	[SYSTEM_STATUS_TABLE+2] = [SYSTEM_STATUS_TABLE+2] - 1;
 	[MEMORY_FREE_LIST + UserAreaPage] = [MEMORY_FREE_LIST + UserAreaPage] + 1;
@@ -50,17 +51,17 @@ else
 	alias counter R9;
 	counter = 0;
 	while (counter < 2) do			//Heap
-		multipush(R3,R4,R5,R6,R7,R8,R9);
+		multipush(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		R1 = 1;
 		call MOD_2;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		multipop(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		[ptbr + 4 + counter*2] = R0;
 		[ptbr + 4 + counter*2 + 1] = "0110";
 		counter = counter + 1;
 	endwhile;
 	counter = 0;
 	while (counter < 2) do			//Stack
-		multipush(R3,R4,R5,R6,R7,R8,R9);
+		multipush(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		R1 = 1;
 		call MOD_2;
 		multipop(R1,R2,R3,R4,R5,R6,R7,R8,R9);
@@ -69,72 +70,41 @@ else
 		counter = counter + 1;
 	endwhile;
 	if([fileindex + 8] != -1) then
-		multipush(R3,R4,R5,R6,R7,R8,R9);
+		multipush(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		R1 = 1;
 		call MOD_2;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		multipop(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		[ptbr + 8] = R0;
 		[ptbr + 9] = "0100";
-		multipush(R3,R4,R5,R6,R7,R8,R9);
-		R1 = 2;
-		R2 = [SYSTEM_STATUS_TABLE + 1];
-		R3 = R0;
-		R4 = [fileindex + 8];
-		call MOD_4;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		loadi(R0,[fileindex + 8]);
 	endif;
 	if([fileindex + 9] != -1) then
-		multipush(R3,R4,R5,R6,R7,R8,R9);
+		multipush(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		R1 = 1;
 		call MOD_2;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		multipop(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		[ptbr + 10] = R0;
 		[ptbr + 11] = "0100";
-		multipush(R3,R4,R5,R6,R7,R8,R9);
-		R1 = 2;
-		R2 = [SYSTEM_STATUS_TABLE + 1];
-		R3 = R0;
-		R4 = [fileindex + 9];
-		call MOD_4;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		loadi(R0,[fileindex + 9]);
 	endif;
 	if([fileindex + 10] != -1) then
-		multipush(R3,R4,R5,R6,R7,R8,R9);
+		multipush(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		R1 = 1;
 		call MOD_2;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		multipop(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		[ptbr + 12] = R0;
 		[ptbr + 13] = "0100";
-		multipush(R3,R4,R5,R6,R7,R8,R9);
-		R1 = 2;
-		R2 = [SYSTEM_STATUS_TABLE + 1];
-		R3 = R0;
-		R4 = [fileindex + 10];
-		call MOD_4;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		loadi(R0,[fileindex + 10]);
 	endif;
 	if([fileindex + 11] != -1) then
-		multipush(R3,R4,R5,R6,R7,R8,R9);
+		multipush(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		R1 = 1;
 		call MOD_2;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		multipop(R1,R2,R3,R4,R5,R6,R7,R8,R9);
 		[ptbr + 14] = R0;
 		[ptbr + 15] = "0100";
-		multipush(R3,R4,R5,R6,R7,R8,R9);
-		R1 = 2;
-		R2 = [SYSTEM_STATUS_TABLE + 1];
-		R3 = R0;
-		R4 = [fileindex + 11];
-		call MOD_4;
-		multipop(R3,R4,R5,R6,R7,R8,R9);
+		loadi(R0,[fileindex + 11]);
 	endif;
-	//preprocess table
-	UserAreaPage = (UserAreaPage) * 512 + (512 - 16);
-	counter = 0;
-	while(counter < 16) do
-		[UserAreaPage+counter] = -1;
-		counter = counter + 1;
-	endwhile;
 	[[ptbr + 16]*512]=[[ptbr + 8]*512+1];
 	SP = 8*512;
 	[PROCESS_TABLE + ( [SYSTEM_STATUS_TABLE + 1] * 16) + 9] = 0;

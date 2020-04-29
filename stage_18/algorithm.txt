@@ -1,0 +1,79 @@
+// Get Free Page
+
+      Increment WAIT_MEM_COUNT field in the System Status Table
+
+      while ( memory is full ){   /* Check the MEM_FREE_COUNT in the System Status Table */
+
+                Set state of the process as ( WAIT_MEM , ____);
+                Call the switch_context() function from the Scheduler Module.
+    	}
+
+	// There is a free page available for use.
+	Decrement the WAIT_MEM_COUNT field and decrement the MEM_FREE_COUNT field in the System Status Table.
+
+	loop through entries in the Memory Free List{
+	/* Available pages for user processes are from 76- 127. See Memory Organisation. */
+        if ( a free entry is found ){
+              Set the Memory Free List entry as 1;
+              Return the corresponding page number;
+        }
+    }
+
+// Release Page
+
+   Decrement the entry corresponding to the page in the Memory Free List;
+
+    If Mem Free List entry becomes 0, increment the MEM_FREE_COUNT field in the System Status Table
+
+    loop through the process table{
+      if (the process state is ( WAIT_MEM , _ ) ){
+            Set state of process as (READY , _ )
+        }
+    }
+
+    return;
+
+// Get Free block 
+
+
+    loop through entries in the Disk Free List from DISK_FREE_AREA to DISK_SWAP_AREA - 1{ 	/* User Block, not preallocated to the OS or swap area */
+        if ( a free entry is found ){
+              Set the Disk Free List entry as 1;
+              Return the corresponding block number;
+        }
+    }
+    return -1;
+
+// Release Block
+
+    Set the Disk Free List entry corresponding to the block to 0.
+
+    return;
+
+// Get Code Page
+
+	/* If the required code page is already loaded by some other process, we simply increment the share count in the Mem Free List */
+
+	Loop though code page entries in the disk map table of all processes
+		If (the block number in the Disk Map Table entry matches the
+		block to be loaded, and it's corresponding page table entry is set to VALID) {
+			increment the share count of the page in the Mem Free List.
+			return the physical page number
+		}
+
+	/* The code page is not in memory, and has to be loaded from disk */
+
+	Get a free memory page by calling the get_free_page() function.
+	Load the disk block into memory page by calling the disk_load() function in the Device Manager Module.
+	Return the memory page number to which the code block has been loaded.
+
+
+// Get swap Block
+
+    loop through entries in the Disk Free List from DISK_SWAP_AREA to DISK_SIZE - 1{ 	/* swap area */
+        if ( a free entry is found ){
+              Set the Disk Free List entry as 1;
+              Return the corresponding block number;
+        }
+    }
+    return -1;

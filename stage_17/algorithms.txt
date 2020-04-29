@@ -1,0 +1,81 @@
+// Free User Area Page
+
+/* If the user are page is swapped out, it has to be swapped back first. */
+
+   Get the User Area Page number from the process table entry
+   corresponding to the PID;
+    
+    loop through the Resource Table{
+          if ( the resource table entry is valid )
+		 if (the resource is a file)
+                 	Close the corresponding file by calling the Close() function in the 
+		 	File Manager Module.
+		 if (the resource is a semaphore)
+                 	Release the semaphore by calling the Release Semaphore() function in the 
+		 	Resource Manager Module.
+		 Invalidate the resource table entry.
+    }
+    
+    Free the User Area page by calling the release_page()
+    function in the Memory Manager module;
+     
+    return;	
+
+
+
+// Exit Process
+
+   if (the current process is not in the exec system call)	// check MODE_FLAG
+    {
+    	loop though the process table entries
+	{
+    		/* Wake up all processes waiting for the current process */
+    		if( process is waitng for the current process ) 		/* indicated by the STATE = (WAIT_PROCESS, PID ) */
+			Set STATE of the process to (READY, - )
+		/* Set the children of the process as Orphan */
+		if( process has PPID as that of the current process)
+			Set PPID to -1.
+        }
+    }
+
+
+// Free Page table
+
+
+    Invalidate the page table entries corresponding to the shared library pages;
+
+    loop through the other page table entries{
+    	  if ( the entry is valid ){
+              free the corresponding page by
+              invoking the release_page() function
+              in the Memory Manager module;
+          }
+          Invalidate the page table entry;
+    }
+
+    Loop through the Disk Map Table entries of the process
+    	if (the entry is valid and is stack or heap)
+	    call release_block() function in the Memory Manager Module.
+        set the entry to -1.
+    return;
+
+
+// Kill All
+
+
+    /* Lock all files to ensure that no processes are in the middle of a file operation */
+    For each valid entry in the Inode table
+    	Acquire lock on the file by calling the acquire_inode() function in the Resource Manager module.
+    
+    For each pid from 2 to MAX_PROC_NUM - 1 	/* PID 0 is idle and 1 is init */
+    {
+        /* This code is relevant only when the Pager Module is implemented in Stage 27 */
+    
+        If pid != pid of the current process AND state of the process in the process table entry is not TERMINATED
+    	  Call exit_process() function from the Process Manager Module.
+    }
+    
+    For each valid entry in the Inode table
+    	Release lock on the file by calling the release_inode() function in the Resource Manager module.
+    
+    return;

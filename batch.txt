@@ -1,0 +1,18 @@
+load --os ../stage_17/os_startup.xsm
+load --module 0 ../stage_18/mod_0_resource_manager.xsm
+load --module 1 ../stage_18/mod_1_process_manager.xsm
+load --module 2 ../stage_18/mod_2_memory_management.xsm
+load --module 4 ../stage_18/mod_4_device_manager.xsm
+load --module 5 ../stage_14/schedule.xsm
+load --module 7 ../stage_18/mod_7_boot.xsm
+load --init ../stage_17/init_shell.xsm
+load --int=timer ../stage_14/timer.xsm
+load --int=disk ../stage_18/int_disk.xsm
+load --int=console ../stage_16/consoleinterrupt.xsm
+load --int=6 ../stage_16/int6.xsm
+load --int=7 ../stage_15/int7.xsm
+load --int=9 ../stage_17/int9.xsm
+load --int=10 ../stage_14/int10.xsm
+load --idle ../stage_17/idle.xsm
+load --exhandler ../stage_10/exception.xsm
+load --library ../expl/library.lib

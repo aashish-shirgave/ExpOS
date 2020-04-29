@@ -10,6 +10,7 @@ if (functionNum == 2) then		//Free User Area Page
 	multipop(R1,R2);
 	return;
 endif;
+
 if (functionNum == 3) then			//Exit
 	multipush(R1,R2);
 	R1 = 4;			//Free page table
@@ -24,6 +25,7 @@ if (functionNum == 3) then			//Exit
 	[PROCESS_TABLE + (pid * 16) + 4] = TERMINATED;
 	return;
 endif;
+
 if (functionNum == 4) then			//Free Page Table
 	alias ptbr R3;
 	alias ptlr R4;

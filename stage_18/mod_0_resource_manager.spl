@@ -1,6 +1,8 @@
 alias functionNum R1;
 alias currentPID R2;
+
 if (functionNum == 3) then
+
 	while ([DISK_STATUS_TABLE] == 1) do
 		[PROCESS_TABLE + (currentPID * 16) + 4] = WAIT_DISK;
 		multipush(R1,R2);
@@ -10,8 +12,11 @@ if (functionNum == 3) then
 	[DISK_STATUS_TABLE] = 1;
 	[DISK_STATUS_TABLE] = currentPID;
 	return;
+
 endif;
+
 if (functionNum == 8) then
+
 	if ([TERMINAL_STATUS_TABLE] == 1) then
 		[PROCESS_TABLE + currentPID * 16 + 4] = WAIT_TERMINAL;
 		multipush(R1,R2);
@@ -21,8 +26,11 @@ if (functionNum == 8) then
 	[TERMINAL_STATUS_TABLE] = 1;
 	[TERMINAL_STATUS_TABLE+1] = currentPID;
 	return;
+
 endif;
+
 if (functionNum == 9) then
+
 	alias r R0;
 	if (currentPID != [TERMINAL_STATUS_TABLE+1]) then
 		r = -1;
@@ -32,4 +40,5 @@ if (functionNum == 9) then
 	[PROCESS_TABLE + currentPID * 16 + 4] = READY;
 	r = 0;
 	return;
+
 endif;
