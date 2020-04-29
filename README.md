@@ -96,8 +96,12 @@ This stage was to learn about file system used. We read and learned about the fi
 <h5>Stage 3 : Bootstrap Loader</h5>
 <p>
 In this stage our learning ojective was
+
 *  Use the XSM Instruction set to write a small OS startup code.
+
 *  Load your OS startup code into the boot block of the disk and get this code executed on bootstrap.
+
+
 </p>
 
 
