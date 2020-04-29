@@ -79,10 +79,10 @@ cd xsm
 
 <h4> What we have done in each Stage </p>
 
-<h5>Stage 1</h5>
+<h5>Stage 1 : Setting up the System </h5>
 <p>The stage 1 was to set up enviroment to run ExpOs.</p> 
 
-<h5>Stage 2</h5>
+<h5>Stage 2 : Understanding the Filesystem</h5>
 <p>
 This stage was to learn about file system used. We read and learned about the file system in ExpOs.
 
@@ -94,11 +94,55 @@ This stage was to learn about file system used. We read and learned about the fi
 
 </p>
 
-<h5>Stage 4<h5>
+<h5>Stage 4 : Learning the SPL Language</h5>
 <p>This stage was to learn SPL (Systems Programming Language) which allows high level programs to be written for the XSM machine.
 We learned about the syntax and specification of the language and wrote a OS startup code and run that on xsm machine.</p>
 
-<h5>stage 5<h5>
+<h5>Stage 5 : XSM Debugging</h5>
 <p>This stage was to get familiarised with xsm debugger.</p>
 
+
+<h5>Stage 9 : Handling kernel stack</h5>
+<p>
+In this stage our objective was to    
+
+*  Get introduced to setting up process table entry for a user program.
+   
+*  Familiarise with the management of kernel stack in hardware interrupt handlers.
+
+Following are some points to be considered for this
+
+
+*  eXpOS requires that when the OS enters an interrupt handler that runs in kernel mode, the interrupt handler must switch to a different stack. This requirement is to prevent user level “hacks” into the kernel through the stack. In the previous stage, though you entered the timer interrupt service routine in the kernel mode, you did not change the stack. In this stage, this will be done.
+
+*  To isolate the kernel from the user stack, the OS kernel must maintain two stacks for a program - a user stack and a kernel stack. In eXpOS, one page called the user area page is allocated for each process. A part of the space in this page will be used for the kernel stack (some other process information also will be stored in this page).
+
+*  Whenever there is a transfer of program control from the user mode to kernel during interrupts (or exceptions), the interrupt handler will change the stack to the kernel stack of the program (that is, the SP register must point to the top of the kernel stack of the program). Before the machine returns to user mode from the interrupt, the user stack must be restored (that is, the SP register must point to the top of the user stack of the program).
+
+*  Once we have two stacks for a user program, we need to design some data structure in memory to store the SP values of the two stacks. This is because the SP register of the machine can store only one value.
+
+*  eXpOS requires you to maintain a Process Table, where data such as value of the kernel stack pointer, user stack pointer etc. pertaining to each process is stored.
+
+*  For now, we just have one user program in execution. Hence we will need just one process table entry to be created. Each process table entry contains several fields. But for now, we are only interested in storing only 1) user stack pointer and 2) the memory page allocated as user area for the program.
+
+*  The process table starts at page number 56 (address 28672). The process has space for 16 entries, each having 16 words. Each entry holds information pertaining to one user process. Since we have only one process, we will use the first entry (the first 16 words starting at address 28672). Among these, we will be updating only entries for user stack pointer (word 13) and user area page number (word 11) in this stage. 
+
+</p>
+
+<h5>Stage 10 : Console output</h5>
+<p>
+Objectives of this stage are
+   
+*   Familiarise with the low level system call interface in eXpOS.
+  
+*   Familiarise with the console output mechanism in eXpOS.
+
+
+In this stage, we will modify the program such that the result is printed directly to the terminal. The terminal print is acheived by issuing a write system call from the user program. The write system call is serviced by interrupt routine 7. 
+</p>
+
+<h5>Stage 11 : Introduction to ExpL</h5>
+<p>
+In this stage we falimiliarised about Experimental language ExpL to write applicaion programs
+</p>
 
