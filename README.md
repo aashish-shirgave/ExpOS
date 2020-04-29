@@ -101,8 +101,10 @@ In this stage our learning ojective was
 
 *  Load your OS startup code into the boot block of the disk and get this code executed on bootstrap.
 
-
+We wrote small assembly code and loaded as os stratup code.
 </p>
+
+
 
 
 <h5>Stage 4 : Learning the SPL Language</h5>
@@ -112,6 +114,39 @@ We learned about the syntax and specification of the language and wrote a OS sta
 <h5>Stage 5 : XSM Debugging</h5>
 <p>This stage was to get familiarised with xsm debugger.</p>
 
+<h5>Stage 6 : Bootstrap Loader</h5>
+<p>
+In this stage our learning ojective was
+
+*     Learn how to set up the address space for an application.
+
+*    Run an init program in user mode from the OS startup code.
+
+In this stage we learned how to setup paging table for process.
+
+</p>
+
+<h5>Stage 7 : ABI and EXEC Format</h5>
+<p>
+In this stage our learning ojective was
+
+*     Familiarise with the Application Binary Interface(ABI) of eXpOS.
+
+*      Modify the INIT program to comply with the eXpOS ABI.
+ 
+
+</p>
+
+<h5>Stage 8 : Handling Timer Interrupt </h5>
+<p>
+In this stage our learning ojective was
+
+*        Run the XSM machine with Timer enabled.
+
+*       Familiarise with timer interrupt handling.
+
+Wrote very basic code for timer interrupt and ran code with timer interrupt enabled.
+</p>
 
 <h5>Stage 9 : Handling kernel stack</h5>
 <p>
@@ -155,5 +190,41 @@ In this stage, we will modify the program such that the result is printed direct
 <h5>Stage 11 : Introduction to ExpL</h5>
 <p>
 In this stage we falimiliarised about Experimental language ExpL to write applicaion programs
+</p>
+
+<h5>Stage 12 : Introduction to Multiprogramming </h5>
+<p>
+In this stage our learning ojective was
+
+*          Familiarise with the idle process.
+
+*          Program the timer interrupt handler to concurrently schedule two processes.
+
+
+In this stage we will set up pagging table table for two process init and idle.We will write timer interrupt handler to schedule the two processes init process and idle process concurrently.  We will do context switch using process table, kernal stack etc. in timer interrupt routine.
+</p>
+
+
+<h5>Stage 13 : Boot Module </h5>
+<p>
+In this stage our learning ojective was
+
+*     Introduction to XSM Module Programming.
+
+*      Implementation of Boot Module.
+
+Boot module will be called from os startup code.
+</p>
+
+
+<h5>Stage 8 : Handling Timer Interrupt </h5>
+<p>
+In this stage our learning ojective was
+
+*        Run the XSM machine with Timer enabled.
+
+*       Familiarise with timer interrupt handling.
+
+Wrote very basic code for timer interrupt and ran code with timer interrupt enabled.
 </p>
 
