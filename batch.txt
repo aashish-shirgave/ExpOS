@@ -1,7 +1,7 @@
 load --os ../stage_17/os_startup.xsm
 load --module 0 ../stage_18/mod_0_resource_manager.xsm
-load --module 1 ../stage_18/mod_1_process_manager.xsm
-load --module 2 ../stage_18/mod_2_memory_management.xsm
+load --module 1 ../stage_17/mod_1_process_manager.xsm
+load --module 2 ../stage_17/mod_2_memory_management.xsm
 load --module 4 ../stage_18/mod_4_device_manager.xsm
 load --module 5 ../stage_14/schedule.xsm
 load --module 7 ../stage_18/mod_7_boot.xsm
