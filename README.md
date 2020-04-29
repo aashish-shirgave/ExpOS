@@ -112,7 +112,14 @@ We wrote small assembly code and loaded as os stratup code.
 We learned about the syntax and specification of the language and wrote a OS startup code and run that on xsm machine.</p>
 
 <h5>Stage 5 : XSM Debugging</h5>
-<p>This stage was to get familiarised with xsm debugger.</p>
+<p>This stage was to get familiarised with xsm debugger.
+Run code using following command. 
+./xsm --debug --timer 0 
+Use r to see content of register int bebug mode.
+Use c to continue untile next breakpoint.
+
+
+</p>
 
 <h5>Stage 6 : Bootstrap Loader</h5>
 <p>
@@ -123,6 +130,12 @@ In this stage our learning ojective was
 * Run an init program in user mode from the OS startup code.
 
 In this stage we learned how to setup paging table for process.
+
+Make sure you enable bebuger and disable timer interrupt
+./xsm --debug --timer 0 (run using this command)
+See the content of R1 register. (R1 will contain square of numbers)
+Use r to see content of register int bebug mode.
+Use c to continue untile next breakpoint.
 
 </p>
 
