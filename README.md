@@ -118,9 +118,9 @@ We learned about the syntax and specification of the language and wrote a OS sta
 <p>
 In this stage our learning ojective was
 
-*     Learn how to set up the address space for an application.
+* Learn how to set up the address space for an application.
 
-*    Run an init program in user mode from the OS startup code.
+* Run an init program in user mode from the OS startup code.
 
 In this stage we learned how to setup paging table for process.
 
@@ -130,9 +130,9 @@ In this stage we learned how to setup paging table for process.
 <p>
 In this stage our learning ojective was
 
-*     Familiarise with the Application Binary Interface(ABI) of eXpOS.
+* Familiarise with the Application Binary Interface(ABI) of eXpOS.
 
-*      Modify the INIT program to comply with the eXpOS ABI.
+* Modify the INIT program to comply with the eXpOS ABI.
  
 
 </p>
@@ -141,9 +141,9 @@ In this stage our learning ojective was
 <p>
 In this stage our learning ojective was
 
-*        Run the XSM machine with Timer enabled.
+* Run the XSM machine with Timer enabled.
 
-*       Familiarise with timer interrupt handling.
+* Familiarise with timer interrupt handling.
 
 Wrote very basic code for timer interrupt and ran code with timer interrupt enabled.
 </p>
@@ -179,9 +179,9 @@ Following are some points to be considered for this
 <p>
 Objectives of this stage are
    
-*   Familiarise with the low level system call interface in eXpOS.
+* Familiarise with the low level system call interface in eXpOS.
   
-*   Familiarise with the console output mechanism in eXpOS.
+* Familiarise with the console output mechanism in eXpOS.
 
 
 In this stage, we will modify the program such that the result is printed directly to the terminal. The terminal print is acheived by issuing a write system call from the user program. The write system call is serviced by interrupt routine 7. 
@@ -196,9 +196,9 @@ In this stage we falimiliarised about Experimental language ExpL to write applic
 <p>
 In this stage our learning ojective was
 
-*          Familiarise with the idle process.
+* Familiarise with the idle process.
 
-*          Program the timer interrupt handler to concurrently schedule two processes.
+* Program the timer interrupt handler to concurrently schedule two processes.
 
 
 In this stage we will set up pagging table table for two process init and idle.We will write timer interrupt handler to schedule the two processes init process and idle process concurrently.  We will do context switch using process table, kernal stack etc. in timer interrupt routine.
