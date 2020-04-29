@@ -239,6 +239,28 @@ In this stage our learning ojective was
 We wrote generalized version of round robin schedular. We used three process in this stage. Schedular will be called from timer interrupt routine.
 </p>
 
+<h5>Stage 15 : Resource Manager Module</h5>
+
+Processes in eXpOS require various resources like terminal, disk, inode etc. To manage these resources among different processes eXpOS implements a resource manager module (Module 0). Before the use of a resource, a process has to first acquire the required resource by invoking the resource manager. A process can acquire a resource if the resource is not already acquired by some other process. If the resource requested by a process is not available, then that process has to be blocked until the resource becomes free. In the meanwhile, other processes may be scheduled. 
+<br>
+The objective of this stage was
+    
+*  Familiarise with passing of parameters to modules.
+    
+*  Implement Resource Manager and Device Manager modules for terminal output handling. 
+
+
+<h5>Stage 16 : Console Input</h5>
+<p>
+The Objective of this stage were
+ 
+ 
+*  Familiarise with the Console Interrupt handling in XSM.
+*  Implementation of console input using the read system call.
+*  Introduction to input buffer.
+
+In this stage, we will introduce you to XSM console interrupt handling. A process must use the XSM instruction IN to read data from the console into the input port P0. IN is a privileged instruction and can be executed only inside a system call/module. Hence, to read data from the console, a user process invokes the read system call . The read system call invokes the Terminal Read function present in Device Manager module (Module 4). The IN instruction will be executed within this Terminal Read function.
+</p>
 <h5>Stage 17 : Program Loader</h5>
 <p>
 In this stage our learning ojective was
@@ -251,5 +273,16 @@ Execulable for file even.xsm is already loaded in disk using xfs-interface (load
 
 </p>
 
+<h5>Stage 18 : Disk Interrupt Handler</h5>
+<p>
+  
+*  Familiarize with disk interrupt handling in XSM.
+*  Modify the Exec system call to handle disk interrupt.
 
+
+In this stage, we will introduce disk interrupt handling in XSM. In the previous stage, we used the loadi statement to load a disk block into a memory page. When the loadi statement (immediate load) is used for loading, the machine will execute the next instruction only after the block transfer is complete by the disk controller. A process can use the load statement instead of loadi to load a disk block to a memory page. The load statement in SPL translates to LOAD instruction in XSM. 
+</p>
+
+<p>Till 29 April, We completed 18 stages. The current ExpOs is multiprocessing which can run any program loaded in the disk.</p>
+<p>The ExpOs does not do is FileIO and User Management Only</p>
 
