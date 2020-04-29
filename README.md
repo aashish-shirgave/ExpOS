@@ -209,9 +209,9 @@ In this stage we will set up pagging table table for two process init and idle.W
 <p>
 In this stage our learning ojective was
 
-*     Introduction to XSM Module Programming.
+* Introduction to XSM Module Programming.
 
-*      Implementation of Boot Module.
+* Implementation of Boot Module.
 
 Boot module will be called from os startup code.
 </p>
@@ -221,9 +221,9 @@ Boot module will be called from os startup code.
 <p>
 In this stage our learning ojective was
 
-*        Run the XSM machine with Timer enabled.
+* Run the XSM machine with Timer enabled.
 
-*       Familiarise with timer interrupt handling.
+* Familiarise with timer interrupt handling.
 
 Wrote very basic code for timer interrupt and ran code with timer interrupt enabled.
 </p>
