@@ -1,0 +1,12 @@
+
+    eXpOS assumes that the disk is a sequence of blocks, where each block can store a 
+sequence of words.The number of words in a block is hardware dependent. Generally,
+the hardware comes with machine instructions to transfer a block from the disk to 
+a contiguous space in memory and back. 
+    The eXpFS logical file system comprises of files organized in a single directory 
+called the root. The root is also treated conceptually as a file. As noted already,
+every eXpFS file is a sequence of words. Associated with each eXpFS file there 
+are three attributes - name, size and type, each attribute being one word long.
+The file name must be a string. Each file must have a unique name. The size of 
+the file will be the total number of words stored in the file. (The maximum size
+of a file is operating system dependent).

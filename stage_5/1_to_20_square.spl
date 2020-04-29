@@ -1,0 +1,10 @@
+alias cnt R0;
+alias sum R1;
+cnt = 0;
+sum = 0;
+while(cnt <= 20) do
+  sum = sum + cnt*cnt;
+  breakpoint;
+  cnt = cnt + 1;
+endwhile;
+print sum;

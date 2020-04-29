@@ -1,3 +1,9 @@
+-->handling kernel stack
+  we need user and kernel stack for obvious reasons
+  to isolate stacks in expos, for each process there is user area page,
+  the part of user area page is used as kernel stack
+   
+
 --> ireturn returns the statement to caller with IP from stack 
 and changes execution mode from kernel mode to user mode.
   where return statement returns to caller from IP from stack but
@@ -24,4 +30,3 @@ https://exposnitc.github.io/os_design-files/stack_module.html (Normal no need to
 
    -Every resource keeps a wait queue keep record of process who wants the resource
    after resource is released only first process of the wait queue is woken up by OS
-   
