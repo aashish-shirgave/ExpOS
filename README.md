@@ -207,7 +207,7 @@ In this stage we will set up pagging table table for two process init and idle.W
 
 <h5>Stage 13 : Boot Module </h5>
 <p>
-In this stage our learning ojective was
+In this our learning ojective was
 
 * Introduction to XSM Module Programming.
 
@@ -217,14 +217,26 @@ Boot module will be called from os startup code.
 </p>
 
 
-<h5>Stage 8 : Handling Timer Interrupt </h5>
+<h5>Stage 14 : Round robin schedular </h5>
 <p>
 In this stage our learning ojective was
 
-* Run the XSM machine with Timer enabled.
+* Implement a preliminary version of the Round Robin scheduling algorithm as an eXpOS module.
 
-* Familiarise with timer interrupt handling.
-
-Wrote very basic code for timer interrupt and ran code with timer interrupt enabled.
+We wrote generalized version of round robin schedular. We used three process in this stage. Schedular will be called from timer interrupt routine.
 </p>
+
+<h5>Stage 17 : Program Loader</h5>
+<p>
+In this stage our learning ojective was
+
+* Familiarize with Process manager and Memory Manager modules.
+
+* Enable the OS to load and execute application programs from the disk (exec system call).
+
+Execulable for file even.xsm is already loaded in disk using xfs-interface (load --exec ../stage_14/even.xsm). When the program gets loaded on disk it makes corresponding entries in file tables. When we will give program name even.xsm as input to exec corresponding interrupt routine is called.
+
+</p>
+
+
 
